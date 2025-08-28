@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    button{
+      margin-bottom: 20px;
+    }
+    .main {
+      display: flex;
+      flex-flow: row;
+      
+    }
+    .box {
+      margin-right: 10px;
+      width: 50px;
+      height: 50px;
+      background-color: aqua;
+      border-radius: 50%;
+    }
+
+    #savedText {
+      height: 100px; 
+      overflow: scroll; 
+
+    }
+  </style>
+</head>
+<!-- 2-1번. 구슬 추가 시 innerHTML 속성을 사용하여 구슬 스타일링이 된 <div> 태그 추가
+홀짝의 경우 querySelectorAll()로 가져온 NodeList 객체의 length 속성을 이용 -->
+<body>
+  <h3>홀수? 짝수?</h3>
+  <div>
+    <button type="button" class="add">구슬 추가</button>
+    <button type="button" class="rand">홀짝</button>
+    <button type="button" class="clear">초기화</button>
+  </div>
+  <div class="main">
+
+  </div>
+
+  <script>
+    const addBtn = document.querySelector('.add');
+    const randBtn = document.querySelector('.rand');
+    const clearBtn = document.querySelector('.clear');
+    const mainP = document.querySelector('.main');
+    
+    let count = 0;
+
+    addBtn.addEventListener('click', function() {
+      mainP.innerHTML += `<div class="box"></div>`;
+      count++;
+    });
+
+    clearBtn.addEventListener('click', function() {
+      mainP.innerHTML = ``;
+      count = 0;
+    });
+
+    randBtn.addEventListener('click', function() {
+      alert(count + '개 입니다.');
+    });
+  </script>
+  <hr>
+  <h1>계산기</h1>
+  <div>
+    <label for="widthValue">첫번째 값: </label>
+    <input type="number" id="firstValue">
+  </div>
+  <div>
+    <label for="heightValue">두번째 값: </label>
+    <input type="number" id="secondValue">
+  </div>
+  <button type="button" class="add2">+</button>
+  <button type="button" class="minus">-</button>
+  <button type="button" class="multiple">*</button>
+  <button type="button" class="divide">/</button>
+  <button type="button" class="last">%</button>
+  <hr>
+  <p>계산결과:</p>
+  <div class="final">
+  </div>
+
+  <script>
+    const firstEl = document.querySelector('#firstValue');
+    const secondEl = document.querySelector('#secondValue');
+    const addBt = document.querySelector('.add2');
+    const minusBt = document.querySelector('.minus');
+    const multipleBt = document.querySelector('.multiple');
+    const divideBt = document.querySelector('.divide');
+    const lastBt = document.querySelector('.last');
+    const fin = document.querySelector('.final');
+
+    addBt.addEventListener('click', function () {
+      let a = Number(firstEl.value);
+      let b = Number(secondEl.value);
+      fin.innerHTML = a + b;
+    });
+    minusBt.addEventListener('click', function () {
+      let a = Number(firstEl.value);
+      let b = Number(secondEl.value);
+      fin.innerHTML = a - b;
+    });
+    multipleBt.addEventListener('click', function () {
+      let a = Number(firstEl.value);
+      let b = Number(secondEl.value);
+      fin.innerHTML = a * b;
+    });
+    divideBt.addEventListener('click', function () {
+      let a = Number(firstEl.value);
+      let b = Number(secondEl.value);
+      fin.innerHTML = a / b;
+    });
+    lastBt.addEventListener('click', function () {
+      let a = Number(firstEl.value);
+      let b = Number(secondEl.value);
+      fin.innerHTML = a % b;
+    });
+  </script>
+  <hr>
+  <h1>문자 누적하기</h1>
+  <div>
+    <input type="text" id="text">
+    <button type="button" class="save">누적</button>
+  </div>
+  <input type="text" id="savedText">
+
+  <script>
+    const saveBtn = document.querySelector('.save');
+    const fText = document.querySelector('#text');
+    const savedText = document.querySelector('#savedText');
+
+    saveBtn.addEventListener('click', function () {
+      let a = fText.value;
+      savedText.value += a;
+      if (savedText.value === a) {
+        fText.value = '';
+      }
+    });
+  </script>
+
+</body>
+</html>

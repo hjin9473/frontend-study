@@ -167,6 +167,24 @@
   <label for="volume">음량(0~50):</label>
   <input type="range" id="volume" min="0" max="50" step="2">
 
+  <!-- Quiz -->
+  <span id="volumeValue">
+    <script>
+      // const inputEls = document.getElementById('volume');
+      // inputEls.addEventListener('input', function () {
+      //   document.getElementById('volumeValue').textContent = this.value;
+      // });
+      const volumeEl = document.querySelector('#volume');
+      const volumeValueEl = document.querySelector('#volumeValue');
+
+      volumeValueEl.textContent = volumeEl.value;
+      volumeEl.addEventListener('input', function () {
+        volumeValueEl.textContent = volumeEl.value;
+      });
+      
+    </script>
+  </span>
+
   <hr>
 
   <!-- 비밀번호 -->

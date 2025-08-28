@@ -6,8 +6,8 @@
   <title>Document</title>
 
   <!-- 구글 머티리얼 아이콘 -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=visibility" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=visibility_off" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
   <style>
     * {
       box-sizing: border-box;
@@ -64,6 +64,10 @@
       padding: 27px 15px 8px;
       position: relative;
     }
+    .login-container .id-box.focused,
+    .login-container .pw-box.focused {
+      border: 2px solid #09aa5c;
+    }
     .login-container .id-box {
       border-radius: 8px 8px 0 0;
     }
@@ -79,7 +83,9 @@
       color: rgba(0, 0, 0, 0.5);
       transition: 0.3s;
     }
-    .login-container .form-input:focus + .text-label {
+    .login-container .form-input:focus + .text-label,
+    .login-container .id-box.on .text-label,
+    .login-container .pw-box.on .text-label {
       font-size: 12px;
       bottom: 30px;
     }
@@ -108,27 +114,61 @@
       <button type="button" class="btn btn-join">회원가입</button>
     </div>
   </div>
-  <!-- <span class="material-symbols-outlined">visibility</span> -->
+
   <script>
     const inputEls = document.querySelectorAll('input.form-input');
     const eyeIcon = document.querySelector('.icon-eye');
-
-    
+    const pwInput = document.getElementById('pw');
 
     inputEls.forEach(function (inputEl) {
       console.log(inputEl);
       const parentEl = inputEl.parentElement; // 부모 요소를 반환
       console.log(parentEl);
-
+      
       // focus: 포커스가 주어졌을 때 발생
       inputEl.addEventListener('focus', function () {
         parentEl.classList.add('focused');
       });
 
-      // blur: 포커스를 잃을 때 발생
+      // blur: 포커를 잃을 때 발생
       inputEl.addEventListener('blur', function () {
         parentEl.classList.remove('focused');
       });
+
+      // 이벤트 추가 실습
+      // change: 요소의 값이 변경되고 포커스를 잃었을 때 발생
+      inputEl.addEventListener('change', function () {
+        console.log('change 이벤트 발생!');
+        console.log(inputEl.value);
+        
+        if (inputEl.value) { // input 요소에 값이 있으면
+          parentEl.classList.add('on');
+        } else {
+          parentEl.classList.remove('on');
+        }
+      });
+
+      // input: 요소가 입력을 받을 때마다 변경된 직후에 발생
+      inputEl.addEventListener('input', function() {
+        console.log('input 이벤트 발생!');
+      });
+
+
+    });
+
+    eyeIcon.addEventListener('click', function () {
+      // if (pwInput.type === 'password') {
+      //   eyeIcon.textContent = 'visibility';
+      //   pwInput.type = 'text';
+      // } else {
+      //   eyeIcon.textContent = 'visibility_off';
+      //   pwInput.type = 'password';
+      // }
+
+      // 삼항 연산자 사용 시
+      const isPassword = pwInput.type === 'password';
+      pwInput.type = isPassword ? 'text' : 'password';
+      eyeIcon.textContent = isPassword ? 'visibility' : 'visibility_off';
     });
   </script>
 </body>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .center{
+      display: flex;
+      flex-flow: row;
+    }
+    select {
+      height: 20px;
+    }
+    .img {
+      width: 300px;
+      height: 300px;
+      background-position: center;
+      background-size: 90px;
+      box-sizing: border-box;
+      justify-content: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-image: url("./images/sponge.png");
+      border: 8px solid cadetblue;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<!-- 3-1번. 날씨 출력 시 기본적으로 '봄', '여름', '가을', '겨울'을 출력하고
+문제에 주어진 특정 조건에서만 '폭염 경보/폭염 주의보/한파 경보/한파 주의보'를 추가로 출력
+
+체크된 요소를 찾는 선택자 예: input[name="season"]:checked -->
+<body>
+  <h1>날씨 확인</h1>
+  <div>
+    <label for="widthValue">계절 </label>
+    <input type="radio" class="one"> 봄
+    <input type="radio" class="two"> 여름
+    <input type="radio" class="three"> 가을
+    <input type="radio" class="four"> 겨울
+  </div>
+  <div>
+    <label for="temp">기온</label>
+    <input type="number" id="temp">
+  </div>
+  <button type="button" class="scan">확인</button>
+
+  <script>
+    const scanBtn = document.querySelector('.scan');
+    const oneEl = document.querySelector('.one');
+    const twoEl = document.querySelector('.two');
+    const threeEl = document.querySelector('.three');
+    const fourEl = document.querySelector('.four');
+    const tempEl = document.querySelector('#temp');
+    
+    scanBtn.addEventListener('click', function () {
+      if (twoEl.checked) {
+        if(Number(tempEl.value) >= 35) {
+          alert('폭염경보');
+        }else if (Number(tempEl.value) >= 33) {
+          alert('폭염 주의보');
+        }
+      }
+
+      if (fourEl.checked) {
+        if(Number(tempEl.value) <= -15) {
+          alert('한파경보');
+        }else if (Number(tempEl.value) <= -12) {
+          alert('한파 주의보');
+        }
+      }
+    });
+  </script>
+
+  <hr>
+  <h1>스폰지밥, 뚱이, 징징이</h1>
+  <div class="center">
+    <select id="cha">
+      <option value="1st" class="f" selected>스폰지밥</option>
+      <option value="2nd" class="s">뚱이</option>
+      <option value="3rd" class="t">징징이</option>
+    </select>
+    <div class="img"></div>
+  </div>
+  <script>
+    const imgFile = document.querySelector('.img');
+    const idEl = document.querySelector('#cha');
+
+    idEl.addEventListener('change', function () {
+      if (idEl.value === "1st") {
+        imgFile.style.backgroundImage = 'url("./images/sponge.png")';
+      }
+      if (idEl.value === "2nd") {
+        imgFile.style.backgroundImage = 'url("./images/dung.png")';
+      }
+      if (idEl.value === "3rd") {
+        imgFile.style.backgroundImage = 'url("./images/human.png")';
+      }
+    });
+  </script>
+</body>
+</html>
