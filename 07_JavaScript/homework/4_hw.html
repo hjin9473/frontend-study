@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>콤보세트</h1>
+  <div>
+    <label for="count">개수: </label>
+    <input type="number" id="count">
+    <button type="button" class="order">주문</button>
+  </div>
+  <div>
+    <div class="popcorn">
+
+    </div>
+    <div class="coke">
+
+    </div>
+  </div>
+  <script>
+    const countEl = document.querySelector('#count');
+    const popcornEl = document.querySelector('.popcorn');
+    const cokeEl = document.querySelector('.coke');
+    const orderBtn = document.querySelector('.order');
+
+    orderBtn.addEventListener('click', function () {
+      let n = Number(countEl.value);
+      for (let i = 0; i < n; i++) {
+        popcornEl.innerHTML += '<img src="./images/popcorn.png" alt="">';
+        cokeEl.innerHTML += '<img src="./images/coke.png" alt="">';
+      }
+    });
+  </script>
+  <hr>
+  <h1>행 열 갯수 각각 입력받아 테이블 만들기</h1>
+  <button type="button" class="table">테이블 생성</button>
+  <div class="maketable"></div>
+  <script>
+    const makeBtn = document.querySelector('.table');
+    const madeTable = document.querySelector('.maketable');
+
+    makeBtn.addEventListener('click', function () {
+      const x = Number(prompt('행 입력'));
+      const y = Number(prompt('열 입력'));
+
+      let table2 = '<table border="1">';
+        for (let i = 0; i < x; i++) {   
+          table2 += '<tr>';
+            for (let j = 0; j < y; j++) {   
+              let num = i * 5 + j + 1;      
+              table2 += `<td>${num}</td>`;
+            }
+            table2 += '</tr>';
+          }
+          table2 += '</table>';
+      madeTable.innerHTML = table2;
+    });
+  </script>
+</body>
+</html>
